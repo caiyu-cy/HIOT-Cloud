@@ -16,10 +16,9 @@
 package com.example.hiotclound.injection.component;
 
 
-import com.example.hiotclound.MainActivity;
+import com.example.hiotclound.ui.main.MainActivity;
 import com.example.hiotclound.injection.PerActivity;
 import com.example.hiotclound.injection.module.ActivityModule;
-import com.example.hiotclound.injection.module.ApplicationModule;
 import com.example.hiotclound.test.mvptest.TsetMVPActivity;
 
 import dagger.Component;

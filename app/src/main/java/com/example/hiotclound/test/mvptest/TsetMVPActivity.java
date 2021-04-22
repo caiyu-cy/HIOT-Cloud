@@ -1,7 +1,5 @@
 package com.example.hiotclound.test.mvptest;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,9 +7,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.hiotclound.R;
-import com.example.hiotclound.base.BaseActivity;
-import com.example.hiotclound.test.dagger2test.DaggerPresenterComponent;
-import com.example.hiotclound.test.dagger2test.PresenterComponent;
+import com.example.hiotclound.test.fragmenttest.TestFragment;
+import com.example.hiotclound.ui.base.BaseActivity;
 import com.example.hiotclound.test.mvptest.model.User;
 
 import javax.inject.Inject;
@@ -40,6 +37,7 @@ public class TsetMVPActivity extends BaseActivity<TestView, TestPresenter> imple
                 presenter.login(user);
             }
         });
+
     }
 
 

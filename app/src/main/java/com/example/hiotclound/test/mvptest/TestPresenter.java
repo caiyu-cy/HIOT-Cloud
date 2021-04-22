@@ -1,10 +1,6 @@
 package com.example.hiotclound.test.mvptest;
 
-import android.webkit.JavascriptInterface;
-import android.widget.TextView;
-
-import com.example.hiotclound.base.BasePresenter;
-import com.example.hiotclound.base.BaseView;
+import com.example.hiotclound.ui.base.BasePresenter;
 import com.example.hiotclound.test.dagger2test.ThirdObj;
 import com.example.hiotclound.test.mvptest.model.User;
 

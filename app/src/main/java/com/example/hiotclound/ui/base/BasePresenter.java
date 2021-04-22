@@ -1,4 +1,4 @@
-package com.example.hiotclound.base;
+package com.example.hiotclound.ui.base;
 
 /**
  * MVP架构presenter层基类
