@@ -8,19 +8,19 @@
         android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="智能物联"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SplashActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".test.lifecycletest.TestLifeCycleActivity"></activity>
-
+        <activity android:name=".test.lifecycletest.TestLifeCycleActivity">
+        </activity>
         <activity android:name=".ui.main.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
@@ -28,15 +28,10 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden">
             >
 
-
-
-
         </activity>
         <activity android:name=".test.mvptest.TsetMVPActivity">
 
         </activity>
-        <activity android:name=".SplashActivity$SplashActivity" />
-
     </application>
 
 </manifest>
