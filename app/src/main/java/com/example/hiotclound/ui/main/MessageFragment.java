@@ -46,6 +46,6 @@ public class MessageFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TextView tvMainFragment = view.findViewById(R.id.tv_main_fragment);
-        tvMainFragment.setText("信息");
+        tvMainFragment.setText("消息");
     }
 }
