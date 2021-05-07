@@ -7,10 +7,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.hiotclound.R;
+import com.example.hiotclound.test.mvptest.model.User;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 
 import javax.security.auth.login.LoginException;
 
@@ -27,12 +33,16 @@ public class TestRetrofitActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private TestRetrofitService service;
 
+    private Gson gson = new Gson();
+    private EditText etToken;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_retrofit);
-
-        //创建retrofit和service对象
+        // 取到edit_token
+        etToken = findViewById(R.id.et_token_retrofit);
+        // 创建retrofit和service对象
         createRetrofit();
         //百度
         Button btnTest = findViewById(R.id.btn_retrofit_enqueue);
@@ -57,7 +67,7 @@ public class TestRetrofitActivity extends AppCompatActivity {
         btnUserInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getUserInfo("a8f8460a436e450692d6482849796fd5_282099add52d4a1fa17df5e2f5f70c74_use");
+                getUserInfo("a8f8460a436e450692d6482849796fd5_8777f6a8aa5b4f56819261cc90e14f6a_use");
 
             }
         });
@@ -102,16 +112,33 @@ public class TestRetrofitActivity extends AppCompatActivity {
      */
     private void updateEmail(String authorization, String email) {
         Call<ResponseBody> call = service.updateEmail(authorization, email);
-        callEnqueue(call);
+        callEnqueueUserInfo(call);
     }
 
     /**
      * 获取用户信息
      * @param authorization
      */
+    //不可以
     private void getUserInfo(String authorization) {
-        Call<ResponseBody> call = service.getUserInfo(authorization);
-        callEnqueue(call);
+        //Call<ResponseBody> call = service.getUserInfo(authorization);
+        //callEnqueue(call);
+        Call<ResultBase<UserBean>> call = service.getUserInfo2(authorization);
+       call.enqueue(new Callback<ResultBase<UserBean>>() {
+           @Override
+           public void onResponse(Call<ResultBase<UserBean>> call, Response<ResultBase<UserBean>> response) {
+              ResultBase<UserBean> resultBase =  response.body();
+              if (resultBase != null && resultBase.getData() != null){
+                  String str = resultBase.getData().getUsername() + "," + resultBase.getData().getEmail();
+                  Toast.makeText(TestRetrofitActivity.this, str, Toast.LENGTH_SHORT).show();
+              }
+           }
+
+           @Override
+           public void onFailure(Call<ResultBase<UserBean>> call, Throwable t) {
+
+           }
+       });
     }
 
     /**
@@ -122,7 +149,7 @@ public class TestRetrofitActivity extends AppCompatActivity {
      */
     private void login(String userName, String password, String loginCode) {
         Call<ResponseBody> call = service.login(userName, password, loginCode);
-        callEnqueue(call);
+        callEnqueueLogin(call);
     }
 
     /**
@@ -147,6 +174,60 @@ public class TestRetrofitActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     Log.d(TAG, "onResponse: " + response.body().string());
+                } catch (IOException e) {
+                    Log.e(TAG, "onResponse: " + e.getMessage(), e);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.getMessage(), t);
+            }
+        });
+    }
+
+    private void callEnqueueLogin(Call<ResponseBody> call) {
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                 //   Log.d(TAG, "onResponse: " + response.body().string());
+                        Type type = new TypeToken<ResultBase<LoginResultDTO>>() {
+                        }.getType();
+                        ResultBase<LoginResultDTO> loginResult = gson.fromJson(response.body().toString(), type);
+                    if (loginResult  != null && loginResult.getData() != null){
+                      String token =  loginResult.getData().getTokenValue();
+                      etToken.setText(token);
+                    }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.getMessage(), t);
+            }
+        });
+    }
+
+    //不可以
+    private void callEnqueueUserInfo(Call<ResponseBody> call) {
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+
+                    //                    Log.d(TAG, "onResponse: " + response.body().string());
+                    Type type = new TypeToken<ResultBase<UserBean>>(){}.getType();
+                    ResultBase<UserBean> resultBase = gson.fromJson(response.body().string(), type);
+                    if (resultBase != null && resultBase.getData() != null) {
+                        UserBean userBean = resultBase.getData();
+                        String str = String.format("用户名：%s，密码：%s，email：%s，用户类型：%s",
+                                userBean.getUsername(), userBean.getPassword(), userBean.getEmail(), userBean.getUserType());
+                        Toast.makeText(TestRetrofitActivity.this, str, Toast.LENGTH_SHORT).show();
+                    }
+     //               if (resultBase != null && resultBase.getMsg() != null){
+     //                   Toast.makeText(TestRetrofitActivity.this, resultBase.getMsg(), Toast.LENGTH_SHORT).show();
+       //             }
                 } catch (IOException e) {
                     Log.e(TAG, "onResponse: " + e.getMessage(), e);
                 }
