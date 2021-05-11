@@ -18,21 +18,27 @@ package com.example.hiotclound.injection.module;
 import android.app.Application;
 import android.content.Context;
 
-
-//import com.huatec.hiot_cloud.App;
 import com.example.hiotclound.App;
+import com.example.hiotclound.BuildConfig;
 import com.example.hiotclound.data.NetworkService;
 import com.example.hiotclound.injection.ApplicationContext;
 import com.google.gson.Gson;
+
+import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+//import com.huatec.hiot_cloud.App;
 
 /**
  * Dagger module that provides objects which will live during the application lifecycle.
@@ -60,7 +66,13 @@ public class ApplicationModule {
     @Provides
     @Singleton
     OkHttpClient provideOkHttpClient(){
-        return new OkHttpClient();
+        final OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.connectTimeout(6, TimeUnit.SECONDS);
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.level(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
+        return builder.addInterceptor(logging)
+                .cache(new Cache(new File(application.getCacheDir(), "HttpResponseCache"), 10 * 1024 * 1024))
+                .build();
     }
 
     //提供Retrofit
