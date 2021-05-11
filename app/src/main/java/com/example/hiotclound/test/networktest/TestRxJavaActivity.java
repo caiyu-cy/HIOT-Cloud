@@ -1,7 +1,5 @@
 package com.example.hiotclound.test.networktest;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,12 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.hiotclound.R;
 import com.example.hiotclound.data.NetworkService;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -198,6 +197,7 @@ public class TestRxJavaActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
+
 
                     }
 
