@@ -67,7 +67,7 @@ public class TestRetrofitActivity extends AppCompatActivity {
         btnUserInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getUserInfo("a8f8460a436e450692d6482849796fd5_8777f6a8aa5b4f56819261cc90e14f6a_use");
+                getUserInfo("a8f8460a436e450692d6482849796fd5_672a4f3e2b01450fa9b3071bdf9f70d6_use");
 
             }
         });
@@ -77,8 +77,8 @@ public class TestRetrofitActivity extends AppCompatActivity {
         btnUpdateEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateEmail("a8f8460a436e450692d6482849796fd5_282099add52d4a1fa17df5e2f5f70c74_use",
-                        "testemail1@qq.com");
+                updateEmail("a8f8460a436e450692d6482849796fd5_672a4f3e2b01450fa9b3071bdf9f70d6_use",
+                        "caiyutestemail1@qq.com");
             }
         });
 
@@ -119,26 +119,28 @@ public class TestRetrofitActivity extends AppCompatActivity {
      * 获取用户信息
      * @param authorization
      */
-    //不可以
+
     private void getUserInfo(String authorization) {
-        //Call<ResponseBody> call = service.getUserInfo(authorization);
-        //callEnqueue(call);
+//        Call<ResponseBody> call = service.getUserInfo(authorization);
+//        callEnqueueUserInfo(call);
+
         Call<ResultBase<UserBean>> call = service.getUserInfo2(authorization);
-       call.enqueue(new Callback<ResultBase<UserBean>>() {
-           @Override
-           public void onResponse(Call<ResultBase<UserBean>> call, Response<ResultBase<UserBean>> response) {
-              ResultBase<UserBean> resultBase =  response.body();
-              if (resultBase != null && resultBase.getData() != null){
-                  String str = resultBase.getData().getUsername() + "," + resultBase.getData().getEmail();
-                  Toast.makeText(TestRetrofitActivity.this, str, Toast.LENGTH_SHORT).show();
-              }
-           }
+        call.enqueue(new Callback<ResultBase<UserBean>>() {
+            @Override
+            public void onResponse(Call<ResultBase<UserBean>> call, Response<ResultBase<UserBean>> response) {
+                ResultBase<UserBean> resultBase = response.body();
+                if (resultBase != null && resultBase.getData() != null){
+                    resultBase.getData();
+                    String str = resultBase.getData().getUsername() + "," + resultBase.getData().getEmail();
+                    Toast.makeText(TestRetrofitActivity.this, str, Toast.LENGTH_SHORT).show();
+                }
+            }
 
-           @Override
-           public void onFailure(Call<ResultBase<UserBean>> call, Throwable t) {
+            @Override
+            public void onFailure(Call<ResultBase<UserBean>> call, Throwable t) {
 
-           }
-       });
+            }
+        });
     }
 
     /**
@@ -209,25 +211,25 @@ public class TestRetrofitActivity extends AppCompatActivity {
         });
     }
 
-    //不可以
+
     private void callEnqueueUserInfo(Call<ResponseBody> call) {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-
-                    //                    Log.d(TAG, "onResponse: " + response.body().string());
+//                    Log.d(TAG, "onResponse: " + response.body().string());
+                    Gson gson = new Gson();
                     Type type = new TypeToken<ResultBase<UserBean>>(){}.getType();
                     ResultBase<UserBean> resultBase = gson.fromJson(response.body().string(), type);
                     if (resultBase != null && resultBase.getData() != null) {
                         UserBean userBean = resultBase.getData();
-                        String str = String.format("用户名：%s，密码：%s，email：%s，用户类型：%s",
+                        String str = String.format("用户名: %s, 密码: %s, email: %s, 用户类型: %s",
                                 userBean.getUsername(), userBean.getPassword(), userBean.getEmail(), userBean.getUserType());
                         Toast.makeText(TestRetrofitActivity.this, str, Toast.LENGTH_SHORT).show();
                     }
-     //               if (resultBase != null && resultBase.getMsg() != null){
-     //                   Toast.makeText(TestRetrofitActivity.this, resultBase.getMsg(), Toast.LENGTH_SHORT).show();
-       //             }
+                    //                   if (resultBase != null && resultBase.getMsg() != null){
+                    //                       Toast.makeText(TestRetrofitActivity.this, resultBase.getMsg(), Toast.LENGTH_SHORT).show();
+                    //                   }
                 } catch (IOException e) {
                     Log.e(TAG, "onResponse: " + e.getMessage(), e);
                 }

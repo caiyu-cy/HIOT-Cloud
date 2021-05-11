@@ -28,6 +28,11 @@ public class Constans {
      */
     public static final int MAIN_VIEWPAGER_INDEX_MINE = 3;
     /**
+     * APP登录的logincode
+     */
+    public static final String LOGIN_CODE_APP = "app";
+    public static final String REGISTER_TYPE_NORMAL = "1";
+    /**
      *
      */
 

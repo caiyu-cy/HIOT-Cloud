@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.hiotclound.R;
-import com.example.hiotclound.data.NetService;
+import com.example.hiotclound.data.NetworkService;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -28,7 +28,7 @@ public class TestRxJavaActivity extends AppCompatActivity {
     private static final String TAG ="TestRxJavaActivity" ;
     private Retrofit retrofit;
 
-    private NetService service;
+    private NetworkService service;
     private EditText etToken;
 
     @Override
@@ -103,8 +103,14 @@ public class TestRxJavaActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(ResultBase<String> resultBase) {
-                        Log.d(TAG, "onNext: " + resultBase.getMsg());
+                        if (resultBase != null && !TextUtils.isEmpty(resultBase.getData())) {
+                            String newEmail = resultBase.getData();
+                            Toast.makeText(TestRxJavaActivity.this, "修改成功，新邮箱:" + newEmail, Toast.LENGTH_SHORT).show();
 
+                        }
+                        if(resultBase != null && !TextUtils.isEmpty(resultBase.getMsg())){
+                            Toast.makeText(TestRxJavaActivity.this, resultBase.getMsg(), Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -140,7 +146,14 @@ public class TestRxJavaActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(ResultBase<UserBean> resultBase) {
-                        Log.d(TAG, "onNext: " + resultBase.getMsg());
+                        if (resultBase != null && resultBase.getData() != null){
+                            UserBean newUserBen = resultBase.getData();
+                            String userStr = String.format("username:%s, email:%s",newUserBen.getUsername(), newUserBen.getEmail());
+                            Toast.makeText(TestRxJavaActivity.this, userStr, Toast.LENGTH_SHORT).show();
+                        }
+                        if (resultBase != null && !TextUtils.isEmpty(resultBase.getMsg())){
+                            Toast.makeText(TestRxJavaActivity.this, resultBase.getMsg(), Toast.LENGTH_SHORT).show();
+                        }
 
                     }
 
@@ -238,6 +251,6 @@ public class TestRxJavaActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-        service = retrofit.create(NetService.class);
+        service = retrofit.create(NetworkService.class);
     }
 }

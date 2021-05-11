@@ -46,19 +46,17 @@ public class TestGsonActivity extends AppCompatActivity {
             }
         });
 
-        //对象转json 不可以
+        //对象转json
         Button btnToJson = findViewById(R.id.btn_to_json);
         btnToJson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Student student2 = new Student();
+                Student student2 =new Student();
                 student2.setAge(50);
                 student2.setName("张三");
                 student2.setMarried(true);
                 String json = gson.toJson(student2);
                 Log.d(TAG, "onClick: " + json);
-
-
             }
         });
         //json转list

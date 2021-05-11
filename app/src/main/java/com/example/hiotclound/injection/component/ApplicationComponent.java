@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.example.hiotclound.App;
+import com.example.hiotclound.data.DataManager;
 import com.example.hiotclound.injection.ApplicationContext;
 import com.example.hiotclound.injection.module.ApplicationModule;
 
@@ -24,6 +25,8 @@ public interface ApplicationComponent {
     Context context();
 
     Application application();
+
+    DataManager dataManager();
 
 
     @Component.Builder

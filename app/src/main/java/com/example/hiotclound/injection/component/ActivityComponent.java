@@ -16,6 +16,7 @@
 package com.example.hiotclound.injection.component;
 
 
+import com.example.hiotclound.test.networktest.TestNetworkPackActivity;
 import com.example.hiotclound.ui.main.MainActivity;
 import com.example.hiotclound.injection.PerActivity;
 import com.example.hiotclound.injection.module.ActivityModule;
@@ -36,6 +37,8 @@ public interface ActivityComponent {
     void inject(MainActivity mainActivity);
 
     void  inject(TsetMVPActivity tsetMVPActivity);
+
+    void  inject(TestNetworkPackActivity activity);
     @Component.Builder
     interface ActivityComponentBuilder {
 
