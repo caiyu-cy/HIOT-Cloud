@@ -2,6 +2,7 @@ package com.example.hiotclound.ui.base;
 
 import android.app.Application;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,8 @@ public abstract class BaseActivity<V extends BaseView , P extends BasePresenter<
         presenter = createPresenter();
         if (presenter != null){
             presenter.setView((V)this);
+
+
         }
 
     }
@@ -84,5 +87,10 @@ public abstract class BaseActivity<V extends BaseView , P extends BasePresenter<
      */
     protected ActivityModule getActivityModule() {
         return new ActivityModule(this);
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

@@ -16,11 +16,12 @@
 package com.example.hiotclound.injection.component;
 
 
-import com.example.hiotclound.test.networktest.TestNetworkPackActivity;
-import com.example.hiotclound.ui.main.MainActivity;
 import com.example.hiotclound.injection.PerActivity;
 import com.example.hiotclound.injection.module.ActivityModule;
 import com.example.hiotclound.test.mvptest.TsetMVPActivity;
+import com.example.hiotclound.test.networktest.TestNetworkPackActivity;
+import com.example.hiotclound.ui.login.LoginActivity;
+import com.example.hiotclound.ui.main.MainActivity;
 
 import dagger.Component;
 
@@ -39,6 +40,8 @@ public interface ActivityComponent {
     void  inject(TsetMVPActivity tsetMVPActivity);
 
     void  inject(TestNetworkPackActivity activity);
+
+    void inject(LoginActivity activity);
     @Component.Builder
     interface ActivityComponentBuilder {
 

@@ -3,7 +3,7 @@ package com.example.hiotclound.utils;
 /**
  * 常量类
  */
-public class Constans {
+public class Constants {
 
     /**
      *
