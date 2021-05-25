@@ -9,6 +9,7 @@ import android.widget.Button;
 import com.example.hiotclound.R;
 import com.example.hiotclound.ui.base.BaseActivity;
 import com.example.hiotclound.ui.main.MainActivity;
+import com.example.hiotclound.utils.LoadingUtil;
 import com.example.hiotclound.utils.ValidatorUtils;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -38,6 +39,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                 if (ValidateSucc(email, password)) {
                     //请求服务端身份验证
 
+                    LoadingUtil.showLoading(LoginActivity.this, "正在登录...");
                     presenter.login(email, password);
 
 
