@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.hiotclound.R;
 import com.example.hiotclound.ui.base.BaseActivity;
 import com.example.hiotclound.ui.main.MainActivity;
+import com.example.hiotclound.ui.register.RegisterActivity;
 import com.example.hiotclound.utils.LoadingUtil;
 import com.example.hiotclound.utils.ValidatorUtils;
 import com.google.android.material.textfield.TextInputEditText;
@@ -30,8 +32,14 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
 
     @BindView(R.id.tiptet_password)
     TextInputEditText tiptetPassword;
+
     @BindView(R.id.btn_login)
     Button btnLogin;
+    /**
+     * 注册
+     */
+    @BindView(R.id.tv_link_signup)
+    TextView tvLinkSignup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +124,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
         //跳转到主页面
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     @OnClick(R.id.btn_login)
@@ -131,5 +140,12 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
 
 
         }
+    }
+
+    @OnClick(R.id.tv_link_signup)
+    public void onViewClicked() {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
