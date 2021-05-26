@@ -56,24 +56,24 @@ public class DataManager {
 
     /**
      * 获取用户信息
-     * @param authorization
+     * @param
      * @return
      */
 
-    public Observable<ResultBase<UserBean>> getUserInfo(String authorization){
-        return service.getUserInfo(authorization);
+    public Observable<ResultBase<UserBean>> getUserInfo() {
+        return service.getUserInfo(sharedPreferencesHelper.getUserToken());
 
     }
 
     /**
      * 修改邮箱
-     * @param authorization
+     * @param
      * @param email
      * @return
      */
 
-    public Observable<ResultBase<String>> updateEmail(String authorization, String email){
-        return service.updateEmail(authorization,email);
+    public Observable<ResultBase<String>> updateEmail(String email) {
+        return service.updateEmail(sharedPreferencesHelper.getUserToken(), email);
 
     }
 

@@ -1,7 +1,6 @@
 package com.example.hiotclound.test.networktest;
 
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.example.hiotclound.data.DataManager;
 import com.example.hiotclound.ui.base.BasePresenter;
@@ -40,7 +39,7 @@ public class TestNetworkPresenter extends BasePresenter<TestNetworkPackActivity>
      * @param authorization
      */
     public void getUserInfo(String authorization){
-        subscribe(dataManager.getUserInfo(authorization), new RequestCallback<ResultBase<UserBean>>() {
+        subscribe(dataManager.getUserInfo(), new RequestCallback<ResultBase<UserBean>>() {
             @Override
             public void onNext(ResultBase<UserBean> resultBase) {
                 if (resultBase != null && resultBase.getData() != null){
@@ -63,7 +62,7 @@ public class TestNetworkPresenter extends BasePresenter<TestNetworkPackActivity>
      * @param email
      */
     public void updateEmail(String authorization, String email){
-        subscribe(dataManager.updateEmail(authorization, email), new RequestCallback<ResultBase<String>>() {
+        subscribe(dataManager.updateEmail(email), new RequestCallback<ResultBase<String>>() {
             @Override
             public void onNext(ResultBase<String> resultBase) {
                 if (resultBase != null && !TextUtils.isEmpty(resultBase.getData())) {

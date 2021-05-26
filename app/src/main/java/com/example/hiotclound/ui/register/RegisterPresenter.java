@@ -54,7 +54,7 @@ class RegisterPresenter extends BasePresenter<RegisterView> {
             public void onError(Throwable e) {
                 super.onError(e);
                 //吐司连接失败
-                getView().showMessage("当前网络无法访问，请稍后再试");
+                getView().showMessage(Constans.TOAST_MSG_NETWORK_FAIL);
             }
         });
     }

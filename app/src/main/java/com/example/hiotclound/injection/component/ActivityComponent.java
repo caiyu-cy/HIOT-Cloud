@@ -23,6 +23,7 @@ import com.example.hiotclound.test.networktest.TestNetworkPackActivity;
 import com.example.hiotclound.ui.login.LoginActivity;
 import com.example.hiotclound.ui.main.MainActivity;
 import com.example.hiotclound.ui.main.SplashActivity;
+import com.example.hiotclound.ui.mine.MineFragment;
 import com.example.hiotclound.ui.register.RegisterActivity;
 
 import dagger.Component;
@@ -48,6 +49,8 @@ public interface ActivityComponent {
     void inject(SplashActivity activity);
 
     void inject(RegisterActivity activity);
+
+    void inject(MineFragment fragment);
     @Component.Builder
     interface ActivityComponentBuilder {
 
