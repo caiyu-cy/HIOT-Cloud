@@ -32,8 +32,14 @@ public class MinePresenter extends BasePresenter<MineView> {
                     getView().showMessage("服务器开小差了，请稍后再试");
                     return;
                 }
+                //如果Token失效
+                if (resultBase.getStatus() == Constans.MSG_STATUS_TOKEN_OUT) {
+                    getView().tokenOut();
+
+                }
                 if (resultBase.getStatus() != Constans.MSG_STATUS_SUCCESS) {
                     getView().showMessage(resultBase.getMsg());
+                    return;
                 }
                 if (resultBase.getData() == null) {
                     getView().showMessage("服务器开小差了，请稍后再试");
@@ -59,6 +65,11 @@ public class MinePresenter extends BasePresenter<MineView> {
                     getView().showMessage("服务器开小差了，请稍后再试");
                     return;
                 }
+                //如果Token失效
+                if (resultBase.getStatus() == Constans.MSG_STATUS_TOKEN_OUT) {
+                    getView().tokenOut();
+
+                }
                 if (resultBase.getStatus() != Constans.MSG_STATUS_SUCCESS) {
                     getView().showMessage(resultBase.getMsg());
                     return;
@@ -70,6 +81,32 @@ public class MinePresenter extends BasePresenter<MineView> {
                 getView().refreshUserHead(url);
             }
 
+        });
+    }
+
+    /**
+     * 注销
+     */
+    public void logout() {
+        subscribe(dataManager.logout(), new RequestCallback<ResultBase>() {
+            @Override
+            public void onNext(ResultBase resultBase) {
+                if (resultBase == null) {
+                    getView().showMessage("服务器开小差了，请稍后再试");
+                    return;
+                }
+                //如果Token失效
+                if (resultBase.getStatus() == Constans.MSG_STATUS_TOKEN_OUT) {
+                    getView().tokenOut();
+
+                }
+                if (resultBase.getStatus() != Constans.MSG_STATUS_SUCCESS) {
+                    getView().showMessage(resultBase.getMsg());
+                    return;
+                }
+                //如果返回成功，打开登录界面
+                getView().tokenOut();
+            }
         });
     }
 }

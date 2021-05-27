@@ -15,4 +15,9 @@ public interface MineView extends BaseView {
     void refreshUserInfo(UserBean userBean);
 
     void refreshUserHead(String url);
+
+    /**
+     * 重新登录的处理
+     */
+    void tokenOut();
 }

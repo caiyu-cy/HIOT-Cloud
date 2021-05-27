@@ -18,6 +18,7 @@ import com.example.hiotclound.R;
 import com.example.hiotclound.test.networktest.UserBean;
 import com.example.hiotclound.ui.base.BaseActivity;
 import com.example.hiotclound.ui.base.BaseFragment;
+import com.example.hiotclound.ui.login.LoginActivity;
 import com.example.hiotclound.utils.ImageUtils;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -109,6 +110,8 @@ public class MineFragment extends BaseFragment<MineView, MinePresenter> implemen
             case R.id.tv_user_center_update_email:
                 break;
             case R.id.btn_logout:
+                //注销
+                presenter.logout();
                 break;
         }
     }
@@ -219,6 +222,13 @@ public class MineFragment extends BaseFragment<MineView, MinePresenter> implemen
     @Override
     public void refreshUserHead(String url) {
         ImageUtils.showCirecle(getActivity(), ivHeadImage, ImageUtils.getFullUrl(url));
+    }
+
+    @Override
+    public void tokenOut() {
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        startActivity(intent);
+        getActivity().finish();
     }
 }
 

@@ -31,6 +31,9 @@ public interface NetworkService {
     Observable<ResultBase<LoginResultDTO>> login(@Query("username")String userName, @Query("password")String password,
                                                  @Query("loginCode")String loginCode);
 
+    @POST("/auth/logout")
+    Observable<ResultBase> logout(@Header("Authorization") String authorization);
+
     /**
      * 获取用户信息
      * @param authorization
@@ -60,4 +63,6 @@ public interface NetworkService {
     @POST("/user/img")
     @Multipart
     Observable<ResultBase<String>> uploadImage(@Part MultipartBody.Part file, @Header("authorization") String authorization);
+
+
 }
