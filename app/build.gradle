@@ -5,7 +5,7 @@ android {
     buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "com.example.hiotclound"
-        minSdkVersion 24
+        minSdkVersion 17
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -71,5 +71,12 @@ dependencies {
     //https://github.com/JakeWharton/butterknife
     implementation 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+
+    //获取系统权限框架ACP
+    implementation 'com.mylhyl:acp:1.1.7'
+
+    //图片选择框架
+    //https://github.com/LuckSiege/PictureSelector
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.9'
 
 }

@@ -6,10 +6,15 @@ import com.example.hiotclound.test.networktest.UserBean;
 import com.example.hiotclound.utils.Constans;
 import com.example.hiotclound.utils.Constants;
 
+import java.io.File;
+
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 /**
  * 网络请求封装
@@ -92,5 +97,17 @@ public class DataManager {
         userBean.setUserType(Constants.REGISTER_TYPE_NORMAL);
         return service.register(userBean);
 
+    }
+
+    /**
+     * 上传头像
+     *
+     * @param filePath
+     */
+    public Observable<ResultBase<String>> uploadImge(String filePath) {
+        File file = new File(filePath);
+        RequestBody requestBody = RequestBody.create(MediaType.parse(Constans.MULTIPART_FORM_DATA), file);
+        MultipartBody.Part multiparFile = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
+        return service.uploadImage(multiparFile, sharedPreferencesHelper.getUserToken());
     }
 }
