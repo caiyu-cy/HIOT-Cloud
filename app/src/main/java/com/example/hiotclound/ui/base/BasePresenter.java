@@ -2,6 +2,8 @@ package com.example.hiotclound.ui.base;
 
 import android.util.Log;
 
+import com.example.hiotclound.test.networktest.ResultBase;
+import com.example.hiotclound.utils.Constans;
 import com.example.hiotclound.utils.LoadingUtil;
 
 import io.reactivex.Observable;
@@ -82,7 +84,22 @@ public class BasePresenter<V extends BaseView> {
         }
 
 
-        public abstract void onNext(T t);
+        public void onNext(T t) {
+            ResultBase resultBase = (ResultBase) t;
+            if (resultBase == null) {
+                getView().showMessage("服务器开小差了，请稍后再试");
+                return;
+            }
+            //如果Token失效
+            if (resultBase.getStatus() == Constans.MSG_STATUS_TOKEN_OUT) {
+                getView().tokenOut();
+
+            }
+            if (resultBase.getStatus() != Constans.MSG_STATUS_SUCCESS) {
+                getView().showMessage(resultBase.getMsg());
+                return;
+            }
+        }
 
 
         public void onError(Throwable e) {
