@@ -13,6 +13,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -64,5 +65,14 @@ public interface NetworkService {
     @Multipart
     Observable<ResultBase<String>> uploadImage(@Part MultipartBody.Part file, @Header("authorization") String authorization);
 
-
+    /**
+     * 绑定设备
+     *
+     * @param device_pk
+     * @param authorization
+     * @return
+     */
+    @POST("/holder/device/{device_pk}")
+    Observable<ResultBase> bindDevice(@Path("device_pk") String device_pk,
+                                      @Header("authorization") String authorization);
 }
