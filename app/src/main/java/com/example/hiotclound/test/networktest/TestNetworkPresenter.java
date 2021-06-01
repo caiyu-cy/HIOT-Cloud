@@ -3,6 +3,7 @@ package com.example.hiotclound.test.networktest;
 import android.text.TextUtils;
 
 import com.example.hiotclound.data.DataManager;
+import com.example.hiotclound.data.bean.UserBean;
 import com.example.hiotclound.ui.base.BasePresenter;
 
 import javax.inject.Inject;

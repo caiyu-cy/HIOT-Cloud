@@ -31,8 +31,7 @@ public class SceneFragment extends BaseFragment {
     }
 
     @Override
-    public void injectDependies() {
-
+    public void injectDependencies() {
 
     }
 

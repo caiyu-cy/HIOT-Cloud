@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.hiotclound.R;
-import com.example.hiotclound.test.networktest.UserBean;
+import com.example.hiotclound.data.bean.UserBean;
 import com.example.hiotclound.ui.base.BaseActivity;
 import com.example.hiotclound.ui.base.BaseFragment;
 import com.example.hiotclound.ui.login.LoginActivity;
@@ -76,8 +76,7 @@ public class MineFragment extends BaseFragment<MineView, MinePresenter> implemen
     }
 
     @Override
-    public void injectDependies() {
-
+    public void injectDependencies() {
         if (getActivity() instanceof BaseActivity) {
             ((BaseActivity) getActivity()).getActivityComponent().inject(this);
         }

@@ -1,4 +1,4 @@
-package com.example.hiotclound.test.networktest;
+package com.example.hiotclound.data.bean;
 
 import java.io.Serializable;
 

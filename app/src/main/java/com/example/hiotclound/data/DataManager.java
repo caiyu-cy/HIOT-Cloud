@@ -1,12 +1,14 @@
 package com.example.hiotclound.data;
 
+import com.example.hiotclound.data.bean.DeviceBean;
+import com.example.hiotclound.data.bean.UserBean;
 import com.example.hiotclound.test.networktest.LoginResultDTO;
 import com.example.hiotclound.test.networktest.ResultBase;
-import com.example.hiotclound.test.networktest.UserBean;
 import com.example.hiotclound.utils.Constans;
 import com.example.hiotclound.utils.Constants;
 
 import java.io.File;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -132,5 +134,15 @@ public class DataManager {
      */
     public Observable<ResultBase> bindDevice(String deviceId) {
         return service.bindDevice(deviceId, sharedPreferencesHelper.getUserToken());
+    }
+
+    /**
+     * 获取指定绑定状态的设备类别
+     *
+     * @param bonding
+     * @return
+     */
+    public Observable<ResultBase<List<DeviceBean>>> listBindedDevice(int bonding) {
+        return service.listBindedDevice(bonding, sharedPreferencesHelper.getUserToken());
     }
 }

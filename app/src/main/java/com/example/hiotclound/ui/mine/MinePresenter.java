@@ -1,8 +1,8 @@
 package com.example.hiotclound.ui.mine;
 
 import com.example.hiotclound.data.DataManager;
+import com.example.hiotclound.data.bean.UserBean;
 import com.example.hiotclound.test.networktest.ResultBase;
-import com.example.hiotclound.test.networktest.UserBean;
 import com.example.hiotclound.ui.base.BasePresenter;
 import com.example.hiotclound.utils.Constans;
 

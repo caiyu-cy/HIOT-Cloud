@@ -1,5 +1,7 @@
 package com.example.hiotclound.test.networktest;
 
+import com.example.hiotclound.data.bean.UserBean;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;

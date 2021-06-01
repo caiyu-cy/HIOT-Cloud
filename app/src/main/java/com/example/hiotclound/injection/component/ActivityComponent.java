@@ -20,6 +20,7 @@ import com.example.hiotclound.injection.PerActivity;
 import com.example.hiotclound.injection.module.ActivityModule;
 import com.example.hiotclound.test.mvptest.TsetMVPActivity;
 import com.example.hiotclound.test.networktest.TestNetworkPackActivity;
+import com.example.hiotclound.ui.devicelist.DeviceListFragment;
 import com.example.hiotclound.ui.login.LoginActivity;
 import com.example.hiotclound.ui.main.MainActivity;
 import com.example.hiotclound.ui.main.SplashActivity;
@@ -54,6 +55,8 @@ public interface ActivityComponent {
     void inject(ScanActivity activity);
 
     void inject(MineFragment fragment);
+
+    void inject(DeviceListFragment fragment);
     @Component.Builder
     interface ActivityComponentBuilder {
 

@@ -1,8 +1,6 @@
 package com.example.hiotclound.test.networktest;
 
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,15 +8,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.hiotclound.R;
-import com.example.hiotclound.test.mvptest.model.User;
+import com.example.hiotclound.data.bean.UserBean;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-
-import javax.security.auth.login.LoginException;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

@@ -16,27 +16,33 @@ import com.example.hiotclound.ui.login.LoginActivity;
 import butterknife.ButterKnife;
 
 /**
- * Fragement模板类
+ * fragment模板类
  */
-public abstract class BaseFragment<V extends BaseView , P extends BasePresenter<V>> extends Fragment implements BaseView {
+
+public abstract class BaseFragment<V extends BaseView, P extends BasePresenter<V>> extends Fragment implements BaseView {
     private P presenter;
+
     public abstract P createPresenter();
-    public abstract void injectDependies();
+
+    public abstract void injectDependencies();
+
     public abstract View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View view = initView(inflater, container, savedInstanceState);
-        injectDependies();
+        injectDependencies();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        presenter  = createPresenter();
-        if (presenter  != null){
-            presenter .setView((V)this);
+
+        presenter = createPresenter();
+        if (presenter != null) {
+            presenter.setView((V) this);
         }
         ButterKnife.bind(this, view);
         super.onViewCreated(view, savedInstanceState);
@@ -50,16 +56,15 @@ public abstract class BaseFragment<V extends BaseView , P extends BasePresenter<
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if(presenter != null){
+        if (presenter != null) {
             presenter.destroy();
         }
-
     }
+
     @Override
     public void onPause() {
         super.onPause();
     }
-
 
     @Override
     public void showMessage(String message) {
@@ -85,7 +90,6 @@ public abstract class BaseFragment<V extends BaseView , P extends BasePresenter<
     protected void startActivityWithoutFinish(Class<?> cls) {
         Intent intent = new Intent(getActivity(), cls);
         startActivity(intent);
-
     }
 
     @Override

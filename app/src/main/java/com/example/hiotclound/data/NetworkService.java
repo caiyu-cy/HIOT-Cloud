@@ -1,8 +1,11 @@
 package com.example.hiotclound.data;
 
+import com.example.hiotclound.data.bean.DeviceBean;
+import com.example.hiotclound.data.bean.UserBean;
 import com.example.hiotclound.test.networktest.LoginResultDTO;
 import com.example.hiotclound.test.networktest.ResultBase;
-import com.example.hiotclound.test.networktest.UserBean;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
@@ -75,4 +78,10 @@ public interface NetworkService {
     @POST("/holder/device/{device_pk}")
     Observable<ResultBase> bindDevice(@Path("device_pk") String device_pk,
                                       @Header("authorization") String authorization);
+
+
+    @GET("/holder/user")
+    Observable<ResultBase<List<DeviceBean>>> listBindedDevice(@Query("bonding") int bonding,
+                                                              @Header("authorization") String authorization);
+
 }

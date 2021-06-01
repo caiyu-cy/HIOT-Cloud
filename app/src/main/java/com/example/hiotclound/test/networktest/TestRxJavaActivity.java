@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hiotclound.R;
 import com.example.hiotclound.data.NetworkService;
+import com.example.hiotclound.data.bean.UserBean;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
