@@ -1,6 +1,6 @@
 package com.example.hiotclound;
 
-import android.app.Application;
+import androidx.multidex.MultiDexApplication;
 
 import com.example.hiotclound.injection.component.ApplicationComponent;
 import com.example.hiotclound.injection.component.DaggerApplicationComponent;
@@ -10,7 +10,7 @@ import com.example.hiotclound.injection.module.ApplicationModule;
  * 所有程序的入口
  */
 
-public class App extends Application {
+public class App extends MultiDexApplication {
 
     private ApplicationComponent component;
 

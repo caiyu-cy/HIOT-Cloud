@@ -1,6 +1,8 @@
 package com.example.hiotclound.data;
 
 import com.example.hiotclound.data.bean.DeviceBean;
+import com.example.hiotclound.data.bean.DeviceDetailBean;
+import com.example.hiotclound.data.bean.UpDataStreamSwitchBean;
 import com.example.hiotclound.data.bean.UserBean;
 import com.example.hiotclound.test.networktest.LoginResultDTO;
 import com.example.hiotclound.test.networktest.ResultBase;
@@ -84,4 +86,35 @@ public interface NetworkService {
     Observable<ResultBase<List<DeviceBean>>> listBindedDevice(@Query("bonding") int bonding,
                                                               @Header("authorization") String authorization);
 
+    @GET("/device/{id}")
+    Observable<ResultBase<DeviceDetailBean>> getDeviceDetail(@Path("id") String deviceId,
+                                                             @Header("authorization") String authorization);
+
+    /**
+     * 控制通道开关
+     *
+     * @param dataStreamId
+     * @param status
+     * @param authorization
+     * @return
+     */
+    @POST("/downdatastream/switch/{downdatastream_pk}")
+    Observable<ResultBase> changesSwitch(@Path("downdatastream_pk") String dataStreamId,
+                                         @Query("status") int status,
+                                         @Header("authorization") String authorization);
+
+    /**
+     * 获取上行通道历史数据
+     *
+     * @param skip
+     * @param limit
+     * @param updatastreamId
+     * @param authorization
+     * @return
+     */
+    @GET("/mongo/download/{updatastreamId}/{skip}/{limit}/List")
+    Observable<ResultBase<List<UpDataStreamSwitchBean>>> getUpDataStreamHistory(@Path("skip") int skip,
+                                                                                @Path("limit") int limit,
+                                                                                @Path("updatastreamId") String updatastreamId,
+                                                                                @Header("authorization") String authorization);
 }

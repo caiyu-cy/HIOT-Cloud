@@ -23,9 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:replace="android:theme">
-        <activity android:name=".ui.scan.ScanActivity">
-
-        </activity>
+        <activity android:name=".ui.datastreamhistory.LineChartActivity"></activity>
+        <activity android:name=".ui.devicedetail.DeviceDetailActivity" />
+        <activity android:name=".ui.scan.ScanActivity" />
         <activity android:name=".ui.register.RegisterActivity" />
         <activity android:name=".test.glidetest.TestGlideActivity" />
         <activity android:name=".test.TestActivity" />
@@ -35,7 +35,6 @@
         <activity android:name=".test.networktest.TestRetrofitActivity" />
         <activity android:name=".test.networktest.TestOkHttpActivity" />
         <activity android:name=".ui.main.SplashActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

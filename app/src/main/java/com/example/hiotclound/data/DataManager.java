@@ -1,6 +1,8 @@
 package com.example.hiotclound.data;
 
 import com.example.hiotclound.data.bean.DeviceBean;
+import com.example.hiotclound.data.bean.DeviceDetailBean;
+import com.example.hiotclound.data.bean.UpDataStreamSwitchBean;
 import com.example.hiotclound.data.bean.UserBean;
 import com.example.hiotclound.test.networktest.LoginResultDTO;
 import com.example.hiotclound.test.networktest.ResultBase;
@@ -144,5 +146,36 @@ public class DataManager {
      */
     public Observable<ResultBase<List<DeviceBean>>> listBindedDevice(int bonding) {
         return service.listBindedDevice(bonding, sharedPreferencesHelper.getUserToken());
+    }
+
+    /**
+     * 获取设备详情
+     *
+     * @param deviceId
+     * @return
+     */
+    public Observable<ResultBase<DeviceDetailBean>> getDeviceDetail(String deviceId) {
+        return service.getDeviceDetail(deviceId, sharedPreferencesHelper.getUserToken());
+    }
+
+    /***
+     * 控制开关通道状态
+     * @param dataStreamId
+     * @param status
+     * @return
+     */
+    public Observable<ResultBase> changeSwitch(String dataStreamId, int status) {
+        return service.changesSwitch(dataStreamId, status, sharedPreferencesHelper.getUserToken());
+    }
+
+    /**
+     * 获取通道历史数据
+     *
+     * @param upDataStreamId
+     * @return
+     */
+    public Observable<ResultBase<List<UpDataStreamSwitchBean>>> getUpDtaStreamHistory(String upDataStreamId) {
+        return service.getUpDataStreamHistory(0, Constans.DEFAULT_DATASTREAM_LIMIT,
+                upDataStreamId, sharedPreferencesHelper.getUserToken());
     }
 }

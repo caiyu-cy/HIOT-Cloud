@@ -10,6 +10,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //解决方法大于65536问题
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -83,4 +85,9 @@ dependencies {
 //https://github.com/jenly1314/ZXingLite
     implementation 'com.king.zxing:zxing-lite:1.1.6-androidx'
 
+    //android开源图表库
+    //https://github.com/PhilJay/MPAndroidChart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    // 分包
+    implementation 'androidx.multidex:multidex:2.0.0'
 }
